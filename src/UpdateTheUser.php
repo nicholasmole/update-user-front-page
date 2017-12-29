@@ -1,8 +1,19 @@
 <?php
+/*
+Update the User
+---------
+Function that is called when you try to update the user data
+Calls Standard Wordpress Fields
+Then Add-User-Fields
+Then Checks Password is set correctly
+
+
+*/
 
 //Helper Update The User
 function update_the_user($new_value){
     //first part wordpress_Data
+    //Not universal needs to be modified to fit all cases
     $update_user_array = array(
         'ID' => get_the_current_user()->ID,
         'first_name' => $new_value['first_name'],
@@ -12,8 +23,8 @@ function update_the_user($new_value){
     );
     wp_update_user( $update_user_array ); 
 
-    //second part custom_Data
-    $additionalModified = array('Title','Address','Address2','City','State','Zip','Country','Phone','Cell');
+    //Second Part add-user-fields fields
+    $additionalModified = explode( ',', get_uufp_custom());
     
     //Loop through array
     for ($i = 0; $i < count($additionalModified); $i++) {
@@ -26,12 +37,12 @@ function update_the_user($new_value){
         }
     }
 
-    //test password
+    //Test Password Set - if errors respond.
     $errors = '';
     $nonce = $_REQUEST['_wpnonce'];
     if ( ! wp_verify_nonce( $nonce, 'my-nonce' ) ) {
         if(($new_value['user_pass'] == '' && $new_value['user_pass_confirm'] == '') ){
-            //field empty
+            //both fields empty
             $errors = 1;
         }
         if(($new_value['user_pass'] != '' && $new_value['user_pass_confirm'] == '')||($new_value['user_pass'] == '' && $new_value['user_pass_confirm'] != '') ){

@@ -1,7 +1,15 @@
 <?php
+/*
+Helpers
+------
+Creates functions that work throughout
+plugin
 
+*/
 
 //function for removing the word name from fields
+//needed to get around wordpress conventions changing
+//between 'name' and '_name' because Wordpress does isn't consistent
 function removeTheWordName($wordpressUserData){
     $wordpressUserData = strtolower($wordpressUserData);
     
@@ -9,12 +17,14 @@ function removeTheWordName($wordpressUserData){
 }
 
 //Get the current User
+//
 function get_the_current_user(){
     global $current_user;
     return $current_user;
 }
 
 //Helper get URL
+//For _wpnonce
 function get_current_url(){
     $current_url = str_replace(home_url( ), "", get_permalink( get_the_ID() ));
     return $current_url;
@@ -46,18 +56,19 @@ function error_password($new_value){
     }
     return '';
 }
-
+//Gets set Options of Wordpress Standard fields you want to call
 function get_uufp_wordpress(){
     
     return get_option( 'wpse_uufp_wordpress' ); 
     
 }
+//Gets set Options of Add-user-fields fields you want to call
 function get_uufp_custom(){
     
     return get_option( 'wpse_uufp_custom' ); 
     
 }
-//Filters the New Value
+//Filters the New Value set in the options
 function regulate_new_value($new_value){
     //Removes Quotes
     $new_value=str_replace('\\', "", $new_value);

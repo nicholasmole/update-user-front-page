@@ -1,16 +1,24 @@
 <?php
+/*
+Short Code Page
+------
+Short Code that creates the front in 
 
+*/
 add_shortcode( 'updateusersc', 'updateusersc' );
 
 function updateusersc(){
     $nonce = wp_create_nonce( 'my-nonce' );
-    /////Field Seperate by comma
+
+    //These two are place holders to show the data that can be user - this can be deleted
     $wordpressUserData = array('FirstName','LastName','Email','Website');
+    $additionalModified = array('Title','Address','Address2','City','State','Zip','Country','Phone','Cell');
+
+    /////Field Seperate by comma    
     $wordpressUserData = explode( ',', get_uufp_wordpress());
     //Change this for fields you wish to add
     $additionalField = get_option( 'wpse_addition_user_field' ); 
     /////Field seperated by comma 
-    $additionalModified = array('Title','Address','Address2','City','State','Zip','Country','Phone','Cell');
     $additionalModified = explode( ',', get_uufp_custom());
   
     //Get the user data

@@ -1,5 +1,14 @@
 <?php
 
+/*
+Option Page
+--------
+Creates the admin page 
+
+
+
+*/
+
 add_action( 'admin_menu', 'uufp_menu' );
 
 //Add the side menu options for fields
@@ -8,7 +17,6 @@ function uufp_menu() {
 }
 
 //Create the page
-
 function my_uufp_plugin_options() {
 	if ( !current_user_can( 'manage_options' ) )  {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
@@ -33,12 +41,12 @@ function my_uufp_plugin_options() {
         <small> Warning. Not all fields are compatable yet</small>
             <div class="updated" style="border-color:#fff; background: rgba(105,105,105,0.1) ;font-size: 24px;veritcal-align:middle;">
             
-                
-                <!--<form action="<?php //content_url() echo plugin_dir_path(__FILE__) . 'src/UpdateList.php'; ?>"  method="POST">-->
-                <table>
+            <table>
                 <div>
                     <tr>
-                    <form method="post" action="?page=uufp_unique_slug">
+                        <?php //created the standard USer Fields sections to front page?>
+                        <form method="post" action="?page=uufp_unique_slug">
+
                         <td>
                             <large>Wordpress Standard Fields:</large>
                         </td>
@@ -51,12 +59,16 @@ function my_uufp_plugin_options() {
                         <td>
                             <button href="?page=uufp_unique_slug" type="submit" class="button button-primary button-large" value="DeleteUpdate">SAVE FIELDS</button>
                         </td>
-                    </form>
+
+                        </form>
                     </tr>
                 </div>
+
                 <br/>
+
                 <div>
                     <tr>
+                    <?php //created the add-user-fields sections to front page?>
                     <form method="post" action="?page=uufp_unique_slug">
                         <td>    
                             <large>Custom Created Fields:</large>

@@ -1,15 +1,28 @@
 <?php
+/*
+pageForm
+------
 
+Creates the Front Page that users can update data
+
+
+
+*/
 
 function pageForm($nonce,$wordpressUserData,$additionalModified,$current_user){
 
     ?>
-
-    <form method="post" action="<?php echo get_current_url(); ?>?_wpnonce={$nonce}">
-            <div class="edit-profile-avatar" style="width:175px;">
-                <?php echo get_avatar( $current_user->user_email, 32 ); ?>
+    <div class="contain-user-update-page"> 
+    <div class="edit-profile-avatar" style="width:175px;">
+    <div class="profile-image-only">
+        <?php echo get_avatar( $current_user->user_email, 32 ); ?>
+    </div>
+    <a href="https://en.gravatar.com/">Visit Gravatar.com to update your profile picture</a>
             </div>
+    <form method="post" action="<?php echo get_current_url(); ?>?_wpnonce={$nonce}">
+
             <table class="table-update-user">   
+                <?php // Standard wordpress fields appear first in this loop ?>
                 <?php
                  if ( count($wordpressUserData) && $wordpressUserData[0] != ''  ): 
                      for($i = 0; $i < count($wordpressUserData); $i++) { ?>
@@ -25,7 +38,7 @@ function pageForm($nonce,$wordpressUserData,$additionalModified,$current_user){
                 <?php }
                 endif;
                 ?>
-            
+                <?php // Add-user-fields fields appear second in this loop ?>
                 <?php
                 if ( count($additionalModified) && $additionalModified[0] != ''  ): 
                 
@@ -59,11 +72,16 @@ function pageForm($nonce,$wordpressUserData,$additionalModified,$current_user){
                 </td></tr>
             </table>
         </form>
-
+        </div>
 
     <?php
 
 }
+
+
+?>
+
+<?php
 
 
 ?>
