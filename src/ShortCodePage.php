@@ -2,7 +2,7 @@
 /*
 Short Code Page
 ------
-Short Code that creates the front in 
+Short Code that creates the front page
 
 */
 add_shortcode( 'updateusersc', 'updateusersc' );

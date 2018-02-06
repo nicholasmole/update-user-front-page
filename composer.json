@@ -1,0 +1,15 @@
+{
+  "name": "nicholasmole/update-user-front-page",
+  "version" : "1.0.0",
+  "description": "Allows for a front page user updatable section ",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+      "name": "Nicholas Mole",
+      "email": "nmole065@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1"
+  }
+}
